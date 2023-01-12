@@ -47,12 +47,10 @@ class Program
         }
 
         int minPosNum = int.MaxValue;
-        bool posNumFound = false;
         foreach(int entity in numbers)
         {
             if (entity > 0)
             {
-                posNumFound = true;
                 if (entity < minPosNum)
                 {
                     minPosNum = entity;
