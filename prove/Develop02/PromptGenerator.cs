@@ -1,7 +1,8 @@
-using System.Collections.Generic;
+using System;
+using System.IO;
 
 public class PromptGenerator
 {
-    public List<PromptLocation> _prompts = new List<PromptLocation>();
 
+    
 }
