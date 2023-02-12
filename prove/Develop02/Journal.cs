@@ -32,12 +32,12 @@ public class Journal
         Console.WriteLine("What is your file name? ");
         string name = Console.ReadLine();
         string fileName = name;
-        string[] lines = System.IO.File.ReadAllLines(fileName);
+        
+string[] lines = System.IO.File.ReadAllLines(fileName);
 
         foreach (string line in lines)
         {
             string[] parts = line.Split(";");
-
             Entry entry = new Entry();
 
              entry._dateTime = parts[0];
