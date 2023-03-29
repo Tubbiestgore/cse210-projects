@@ -3,52 +3,62 @@ using System.Collections.Generic;
 
 class Order
 {
-    private List<Product> _products;
-    private Customer _customer;
+    private List<Product> _products = new List<Product>();
+    private Customer _customer {get; set;}
 
-    public Order(Customer customer, List<Product> products)
+    public Order(Customer customer)
     {
         _customer = customer;
-        _products = products;
     }
 
-    public double GetTotalPrice()
+    public void AddProduct(Product product)
     {
-        double totalPrice = 0;
+        _products.Add(product);
+    }
+
+    public double CalculateTotal()
+    {
+        double total = 0;
         foreach (Product product in _products)
         {
-            totalPrice += product.Price * product.Quantity;
+            double price = product.CalculatePrice();
+            total += price;
         }
 
-        if (_customer.Address.International())
-        {
-            totalPrice += 5;
-        }
-        else
-        {
-            totalPrice += 35;
-        }
-
-        return totalPrice;
+        total = Math.Round(total, 2);
+        return total;
     }
 
-    public string GetPackingLabel()
+    public double CalculateFinal()
     {
-        string label = "Packing label:\n";
+        double total = Math.Round((CalculateTotal() + _customer.GetShippingCost()),2);
+        return total;
+    }
+
+    public void DisplayCost(double total, double shippingCost, double totalCost)
+    {
+        Console.WriteLine($"Subtotal: ${total}");
+        Console.WriteLine($"Shipping: ${shippingCost}");
+        Console.WriteLine($"Total: ${totalCost}");
+    }
+
+    public void DisplayPackingLabel()
+    {
+        Console.WriteLine("Packing Label: ");
         foreach (Product product in _products)
         {
-            label += string.Format("{0} ({1})\n", product.Name, product.Id);
+            product.DisplayProduct();
         }
-
-        return label;
     }
 
-    public string GetShippingLabel()
+    public void DisplayShippingLabel()
     {
-        string label = "Shipping label:\n";
-        label += string.Format("Name: {0}\n", _customer.Name);
-        label += _customer.Address.ToString();
-
-        return label;
+        Console.WriteLine("Shipping Label: ");
+        _customer.DisplayCustomer();
     }
+
+
+
+
+
 }

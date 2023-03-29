@@ -4,30 +4,40 @@ class Program
 {
     static void Main(string[] args)
     {
-        Address address1 = new Address("123 Main St", "San Diego", "CA", "USA");
+        Address address1 = new Address("490 Sandy Boulevard", "San Fransisco", "California", "USA");
         Customer customer1 = new Customer("David Keller", address1);
+        double order1ShippingCost = customer1.GetShippingCost();
+        Product order1Product1 = new Product("NVIDIA DDX Graphics Card", 15400, 245.99, 1);
+        Product order1Product2 = new Product("75 IN FlatScreen TV", 24376, 899.99, 1);
+        Product order1Product3 = new Product("Old Fashinoed Root Beer", 435, 1.99, 6);
+        Order order1 = new Order(customer1);
+        order1.AddProduct(order1Product1);
+        order1.AddProduct(order1Product2);
+        order1.AddProduct(order1Product3);
+        double order1Subtotal = order1.CalculateTotal();
+        double order1Total = order1.CalculateFinal();
+        order1.DisplayShippingLabel(); 
+        Console.WriteLine();
+        order1.DisplayPackingLabel();
+        Console.WriteLine();
+        order1.DisplayCost(order1Subtotal, order1ShippingCost, order1Total);
 
-        Address address2 = new Address("456 Stark Strasse", "Karlsruhe", "Baden-Wuertemburg", "Germany");
+        Address address2 = new Address("1500 Stark Strasse", "Karlsruhe", "Baden-Wuertemburg", "Deu");
         Customer customer2 = new Customer("Herr Kramer", address2);
-
-        Product product1 = new Product("Sparkle Beads", 1, 9.99, 2);
-        Product product2 = new Product("Nvidia 4065 Graphics Card", 2, 200.99, 1);
-        Product product3 = new Product("Cheezewiz", 3, 5.99, 3);
-        Product product4 = new Product("Saurkraut", 4, 4.99, 15);
-        Product product5 = new Product("Milch", 5, 3.26, 10);
-        Product product6 = new Product("Eier", 6, 1.99, 4);
-
-        Order order1 = new Order(customer1, new List<Product>() { product1, product2, product3 });
-        Order order2 = new Order(customer2, new List<Product>() { product4, product5, product6 });
-
-        Console.WriteLine(order1.GetPackingLabel());
-        Console.WriteLine("Total Price (including one time shipping cost): ${0}", order1.GetTotalPrice());
+        double order2ShippingCost = customer2.GetShippingCost();
+        Product order2Product1 = new Product("Milch", 45, 4.75, 1);
+        Product order2Product2 = new Product("Eier", 23, 0.20, 12);
+        Product order2Product3 = new Product("Brot", 30, 0.85, 2);
+        Order order2 = new Order(customer1);
+        order2.AddProduct(order2Product1);
+        order2.AddProduct(order2Product2);
+        order2.AddProduct(order2Product3);
+        double order2Subtotal = order2.CalculateTotal();
+        double order2Total = order2.CalculateFinal();
+        order2.DisplayShippingLabel(); 
         Console.WriteLine();
-        Console.WriteLine(order1.GetShippingLabel());
+        order2.DisplayPackingLabel();
         Console.WriteLine();
-        Console.WriteLine(order2.GetPackingLabel());
-        Console.WriteLine("Total Price (including one time shipping cost): ${0}", order2.GetTotalPrice());
-        Console.WriteLine();
-        Console.WriteLine(order2.GetShippingLabel());
+        order2.DisplayCost(order2Subtotal, order2ShippingCost, order2Total);
     }
 }

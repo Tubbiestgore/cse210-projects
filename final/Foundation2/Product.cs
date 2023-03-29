@@ -15,23 +15,53 @@ class Product
         _quantity = quantity;
     }
 
-    public string Name
+    public string GetName()
     {
-        get { return _name; }
+        return _name;
     }
 
-    public int Id
+    public void SetName(string name)
     {
-        get { return _id; }
+        name = "";
     }
 
-    public double Price
+    public int GetID()
     {
-        get { return _price; }
+        return _id;
     }
 
-    public int Quantity
+    public void SetID(int id)
     {
-        get { return _quantity; }
+        id = 0;
+    }
+
+    public double GetPrice()
+    {
+        return _price;
+    }
+
+    public void SetPrice(double price)
+    {
+        price = 0;
+    }
+
+    public int GetQuantity()
+    {
+        return _quantity;
+    }
+
+    public void SetQuantity(int quantity)
+    {
+        quantity = 0;
+    }
+
+    public double CalculatePrice()
+    {
+        return Math.Round((_price * _quantity),2);
+    }
+
+    public void DisplayProduct()
+    {
+        Console.WriteLine($"{_name}({_id}) => Total: ${CalculatePrice()}");
     }
 }
